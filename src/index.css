@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Themed scrollbar — light mode ── */
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 99px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* ── Themed scrollbar — dark mode ── */
+.dark .custom-scroll::-webkit-scrollbar-thumb {
+  background: #1e3060;
+}
+
+.dark .custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #2a3f70;
+}
+
+/* ── Fallback for Firefox ── */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+/* ── Smooth theme transitions — all color-bearing properties ── */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity;
+  transition-duration: 300ms;
+  transition-timing-function: ease;
+}
+
+/* ── Don't transition transform/position — keeps animations snappy ── */
+.transition-all,
+.transition-transform,
+.transition-none {
+  transition-property: all;
+}
+
+/* ══════════════════════════════════════════════
+   Animated Sun/Moon Theme Toggle
+   Pure CSS — no dependencies
+   ══════════════════════════════════════════════ */
+.theme-toggle {
+  position: relative;
+  cursor: pointer;
+  width: 2.25rem;
+  height: 2.25rem;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle input {
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+  z-index: 1;
+}
+
+.theme-toggle svg {
+  position: absolute;
+  width: 1.125rem;
+  height: 1.125rem;
+  transition: transform 0.4s ease;
+  transform: rotate(40deg);
+  pointer-events: none;
+}
+
+.theme-toggle svg .sun-moon {
+  transform-origin: center center;
+  transition: transform 0.4s ease;
+  transform: scale(1);
+}
+
+.theme-toggle svg .sun-ray {
+  transform-origin: center center;
+  transform: scale(0);
+}
+
+.theme-toggle svg mask>circle {
+  transition: transform 0.64s cubic-bezier(0.41, 0.64, 0.32, 1.575);
+  transform: translate(0px, 0px);
+}
+
+.theme-toggle svg .sun-ray-2 {
+  animation-delay: 0.05s !important;
+}
+
+.theme-toggle svg .sun-ray-3 {
+  animation-delay: 0.10s !important;
+}
+
+.theme-toggle svg .sun-ray-4 {
+  animation-delay: 0.17s !important;
+}
+
+.theme-toggle svg .sun-ray-5 {
+  animation-delay: 0.25s !important;
+}
+
+.theme-toggle svg .sun-ray-6 {
+  animation-delay: 0.29s !important;
+}
+
+.theme-toggle input:checked+svg {
+  transform: rotate(90deg);
+  color: #f59e0b;
+}
+
+.theme-toggle input:checked+svg mask>circle {
+  transform: translate(16px, -3px);
+}
+
+.theme-toggle input:checked+svg .sun-moon {
+  transform: scale(0.55);
+}
+
+.theme-toggle input:checked+svg .sun-ray {
+  animation: sun-rays 0.4s ease 0s 1 forwards;
+}
+
+@keyframes sun-rays {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ══════════════════════════════════════════════
+   Animated Checkbox
+   Pure CSS — no dependencies
+   ══════════════════════════════════════════════ */
+.anim-checkbox-wrap {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+}
+
+.anim-checkbox-wrap input {
+  display: none;
+}
+
+.anim-checkbox-mark {
+  position: absolute;
+  inset: 0;
+  background-color: transparent;
+  border-radius: 0.25em;
+  transition: background-color 0.25s;
+}
+
+.anim-checkbox-mark:after {
+  content: "";
+  position: absolute;
+  transform: rotate(0deg);
+  border: 0.1em solid currentColor;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25em;
+  transition: all 0.25s, border-width 0.1s;
+  box-sizing: border-box;
+}
+
+.anim-checkbox-wrap input:checked~.anim-checkbox-mark {
+  background-color: #3b82f6;
+}
+
+.anim-checkbox-wrap input:checked~.anim-checkbox-mark:after {
+  left: 30%;
+  top: 15%;
+  width: 25%;
+  height: 55%;
+  border-color: transparent white white transparent;
+  border-width: 0 0.15em 0.15em 0;
+  border-radius: 0;
+  transform: rotate(45deg);
+}
