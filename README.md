@@ -26,7 +26,7 @@ A fully client-side file management application built with **React 18**, **Vite 
 
 ```bash
 # 1. Clone the repository
-git clone <repo-url>
+git clone <https://github.com/V7-AI-Hiring/satya-prabhu>
 cd smart-asset-manager
 
 # 2. Install dependencies
